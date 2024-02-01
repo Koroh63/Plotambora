@@ -12,7 +12,8 @@
 Ce projet a pour but de determiner le nombre de morts/bléssés/personnes touchées des catastrophes naturelles en fonction des différentes informations que nous fournit notre Dataset.
 Nous utiliserons Python et Panda pour traiter ce dataset et pour réaliser de l'apprentissage continu.
 
-[Texte du lien](https://www.kaggle.com/datasets/brsdincer/all-natural-disasters-19002021-eosdis?resource=download){:target="_blank"}
+<a href="https://www.kaggle.com/datasets/brsdincer/all-natural-disasters-19002021-eosdis?resource=download" target="_blank">Lien du Dataset ici</a>
+
 # Développeurs
 
 - Corentin RICHARD : corentin.richard@etu.uca.fr
