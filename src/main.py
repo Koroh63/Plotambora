@@ -10,25 +10,25 @@ def main():
     getInfoDataSet(fullDataSet)
 
 
-    X,Y = separateValues(fullDataSet)
+    # X,Y = separateValues(fullDataSet)
     
-    Xtrain,Xtest,ytrain,ytest = initTraining(X,Y)
+    # Xtrain,Xtest,ytrain,ytest = initTraining(X,Y)
 
-    modelLinearRegression = LinearRegression()
-    modelLasso = Lasso()
-    modelElasticNet = ElasticNet()
+    # modelLinearRegression = LinearRegression()
+    # modelLasso = Lasso()
+    # modelElasticNet = ElasticNet()
 
-    modelLinearRegression.fit(Xtrain,ytrain)
-    modelLasso.fit(Xtrain,ytrain)
-    modelElasticNet.fit(Xtrain,ytrain)
+    # modelLinearRegression.fit(Xtrain,ytrain)
+    # modelLasso.fit(Xtrain,ytrain)
+    # modelElasticNet.fit(Xtrain,ytrain)
 
-    ypreditLineatRegression = modelLinearRegression.predict(Xtest)
-    ypreditLasso = modelLasso.predict(Xtest)
-    ypreditElasticNet = modelElasticNet.predict(Xtest)
-    # print(ypredit)
-    print(accuracy_score(ytest, ypreditLineatRegression))
-    print(accuracy_score(ytest, ypreditLasso))
-    print(accuracy_score(ytest, ypreditElasticNet))
+    # ypreditLineatRegression = modelLinearRegression.predict(Xtest)
+    # ypreditLasso = modelLasso.predict(Xtest)
+    # ypreditElasticNet = modelElasticNet.predict(Xtest)
+    # # print(ypredit)
+    # print(accuracy_score(ytest, ypreditLineatRegression))
+    # print(accuracy_score(ytest, ypreditLasso))
+    # print(accuracy_score(ytest, ypreditElasticNet))
 
     
     
