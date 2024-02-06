@@ -15,8 +15,8 @@ def importCleanDataSet():
     ## Read DataFrame ##
     ds = pd.read_csv(DATASET_LOCATION,skipinitialspace=True,usecols=[0,4,5,6,8,10,11,12,28,29,30,31,32,33,34,35,37]) 
 
-    ## Manage Date ##
-    ds.fillna({'Start Month': 1, 'Start Day': 1,'End Month':1,'End Day':1,'Total Deaths':0,'No Injured':0,'No Affected':0,'Total Affected':0}, inplace=True)
+    dsAvg = ds.dropna()['Total Deaths'].mean()
+    ds.fillna({'Start Month': 1, 'Start Day': 1,'End Month':1,'End Day':1,'Total Deaths':dsAvg,'No Injured':0,'No Affected':0,'Total Affected':0}, inplace=True)
     
     ds['Start Day'] = ds['Start Day'].astype(int)
     ds['End Day'] = ds['End Day'].astype(int)
