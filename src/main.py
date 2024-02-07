@@ -10,7 +10,7 @@ from sklearn.metrics import mean_squared_error,r2_score
 def main(): 
     fullDataSet = importCleanDataSet()
 
-    showHist(fullDataSet['Total Deaths'])
+    #showHist(fullDataSet['Total Deaths'])
 
     getInfoDataSet(fullDataSet)
 
@@ -49,6 +49,13 @@ def main():
     print("R2 Score - ElasticNet:", r2_elastic_net)
     #r2
 
+    plt.figure(figsize=(10, 6))
+    plt.hist(fullDataSet['Total Deaths'], bins=30, color='skyblue', edgecolor='black')
+    plt.title('Histogramme des valeurs de Total Deaths')
+    plt.xlabel('Total Deaths')
+    plt.ylabel('Fréquence')
+    plt.grid(True)
+    plt.show()
 
 
   
