@@ -13,9 +13,15 @@ from sklearn.ensemble import RandomForestClassifier
 def importCleanDataSet():
     
     ## Read DataFrame ##
-    ds = pd.read_csv(DATASET_LOCATION,skipinitialspace=True,usecols=[0,4,5,6,8,10,11,12,28,29,30,31,32,33,34,35,37]) 
+    ds = pd.read_csv(DATASET_LOCATION,skipinitialspace=True,usecols=[0,4,5,6,8,10,11,12,28,29,30,31,32,33,34,35,37]) # [0,4,5,6,8,10,11,12,28,29,30,31,32,33,34,35,37]
 
-    dsAvg = ds.dropna()['Total Deaths'].mean()
+    ds.drop(['ISO', 'Region'], axis=1, inplace=True)  
+    #ds.drop(['Disaster Type','Disaster Subgroup'], axis=1, inplace=True)  
+
+
+
+    dsAvg = ds['Total Deaths'].mean()
+    print(dsAvg)
     ds.fillna({'Start Month': 1, 'Start Day': 1,'End Month':1,'End Day':1,'Total Deaths':dsAvg,'No Injured':0,'No Affected':0,'Total Affected':0}, inplace=True)
     
     ds['Start Day'] = ds['Start Day'].astype(int)
@@ -42,7 +48,7 @@ def importCleanDataSet():
     # Fill NaT values with a default date (you can change this to fit your needs)
     default_date = pd.to_datetime('1900-01-01')
     ds['Start Date'].fillna(default_date, inplace=True)
-    ds['End Date'].fillna(default_date, inplace=True)
+    ds['End Date'].fillna(ds['Start Date'], inplace=True)
 
     ds['Duration'] = (ds['End Date'] - ds['Start Date']).dt.days
     ds.drop(['Start Month', 'Start Day','End Year','End Month','End Day','Start Date','End Date','Event Name'],axis=1,inplace=True)
@@ -58,11 +64,11 @@ def importCleanDataSet():
     type_mapping = {type_str: idx + 1 for idx, type_str in enumerate(ds['Disaster Subtype'].unique())}
     ds['Disaster Subtype'] = ds['Disaster Subtype'].replace(type_mapping)
 
-    type_mapping = {type_str: idx + 1 for idx, type_str in enumerate(ds['ISO'].unique())}
-    ds['ISO'] = ds['ISO'].replace(type_mapping)
+    # type_mapping = {type_str: idx + 1 for idx, type_str in enumerate(ds['ISO'].unique())}
+    # ds['ISO'] = ds['ISO'].replace(type_mapping)
 
-    type_mapping = {type_str: idx + 1 for idx, type_str in enumerate(ds['Region'].unique())}
-    ds['Region'] = ds['Region'].replace(type_mapping)
+    # type_mapping = {type_str: idx + 1 for idx, type_str in enumerate(ds['Region'].unique())}
+    # ds['Region'] = ds['Region'].replace(type_mapping)
 
     type_mapping = {type_str: idx + 1 for idx, type_str in enumerate(ds['Continent'].unique())}
     ds['Continent'] = ds['Continent'].replace(type_mapping)
@@ -73,6 +79,7 @@ def importCleanDataSet():
     ds['No Injured'] = ds['No Injured'].astype(int)
     ds['No Affected'] = ds['No Affected'].astype(int)
     ds['Total Affected'] = ds['Total Affected'].astype(int)
+
 
     
 
