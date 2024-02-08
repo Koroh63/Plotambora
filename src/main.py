@@ -19,8 +19,8 @@ def main():
     Xtrain,Xtest,ytrain,ytest = initTraining(X,Y)
 
     modelLinearRegression = LinearRegression()
-    modelLasso = Lasso(alpha=1.0,max_iter=100000)
-    modelElasticNet = ElasticNet(alpha=1.0,max_iter=100000)
+    modelLasso = Lasso(alpha=1.0,max_iter=10000)
+    modelElasticNet = ElasticNet(alpha=1.0,max_iter=10000)
 
     modelLinearRegression.fit(Xtrain,ytrain)
     modelLasso.fit(Xtrain,ytrain)
@@ -58,13 +58,13 @@ def main():
     print(np.mean((ypreditElasticNet/ytest)*100) , "% d'erreur moyenne ")
     #r2
 
-    plt.figure(figsize=(10, 6))
-    plt.hist(fullDataSet['Total Deaths'], bins=100, color='skyblue', edgecolor='black')
-    plt.title('Histogramme des valeurs de Total Deaths')
-    plt.xlabel('Total Deaths')
-    plt.ylabel('Fréquence')
-    plt.grid(True)
-    plt.show()
+    # plt.figure(figsize=(10, 6))
+    # plt.hist(fullDataSet['Total Deaths'], bins=100, color='skyblue', edgecolor='black')
+    # plt.title('Histogramme des valeurs de Total Deaths')
+    # plt.xlabel('Total Deaths')
+    # plt.ylabel('Fréquence')
+    # plt.grid(True)
+    # plt.show()
 
 
   
