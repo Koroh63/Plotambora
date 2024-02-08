@@ -19,8 +19,8 @@ def main():
     Xtrain,Xtest,ytrain,ytest = initTraining(X,Y)
 
     modelLinearRegression = LinearRegression()
-    modelLasso = Lasso(alpha=1500.0,max_iter=100000)
-    modelElasticNet = ElasticNet(alpha=1500.0,max_iter=100000)
+    modelLasso = Lasso(alpha=1.0,max_iter=100000)
+    modelElasticNet = ElasticNet(alpha=1.0,max_iter=100000)
 
     modelLinearRegression.fit(Xtrain,ytrain)
     modelLasso.fit(Xtrain,ytrain)
@@ -29,6 +29,8 @@ def main():
     ypreditLineatRegression = modelLinearRegression.predict(Xtest)
     ypreditLasso = modelLasso.predict(Xtest)
     ypreditElasticNet = modelElasticNet.predict(Xtest)
+
+    
     
     mse_linear_regression = mean_squared_error(ytest, ypreditLineatRegression)
     mse_lasso = mean_squared_error(ytest, ypreditLasso)
@@ -40,17 +42,24 @@ def main():
 
 
 
-
+    print( "-- Linear Regression : ")
     print("Mean Squared Error - Linear Regression:", mse_linear_regression)
     print("R2 Score - Linear Regression:", r2_linear_regression)
+    print(np.mean((ypreditLineatRegression/ytest)*100) , "% d'erreur moyenne ")
+
+    print( "-- Lasso : ")
     print("Mean Squared Error - Lasso:", mse_lasso)
     print("R2 Score - Lasso:", r2_lasso)
+    print(np.mean((ypreditLasso/ytest)*100) , "% d'erreur moyenne ")
+
+    print( "-- ElasticNet : ")
     print("Mean Squared Error - ElasticNet:", mse_elastic_net)
     print("R2 Score - ElasticNet:", r2_elastic_net)
+    print(np.mean((ypreditElasticNet/ytest)*100) , "% d'erreur moyenne ")
     #r2
 
     plt.figure(figsize=(10, 6))
-    plt.hist(fullDataSet['Total Deaths'], bins=30, color='skyblue', edgecolor='black')
+    plt.hist(fullDataSet['Total Deaths'], bins=100, color='skyblue', edgecolor='black')
     plt.title('Histogramme des valeurs de Total Deaths')
     plt.xlabel('Total Deaths')
     plt.ylabel('Fréquence')
