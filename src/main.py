@@ -14,7 +14,7 @@ def main():
 
     getInfoDataSet(fullDataSet)
 
-    X,Y = separateValuesTD(fullDataSet)
+    X,Y = separateValuesRegression(fullDataSet)
     
     Xtrain,Xtest,ytrain,ytest = initTraining(X,Y)
 
@@ -37,7 +37,7 @@ def main():
     mse_elastic_net = mean_squared_error(ytest, ypreditElasticNet)
     
     r2_linear_regression = r2_score(ytest, ypreditLineatRegression)
-    r2_lasso = r2_score(ytest, ypreditLasso)
+    #r2_lasso = r2_score(ytest, ypreditLasso)
     r2_elastic_net = r2_score(ytest, ypreditElasticNet)
 
 
@@ -47,10 +47,10 @@ def main():
     print("R2 Score - Linear Regression:", r2_linear_regression)
     print(np.mean((ypreditLineatRegression/ytest)*100) , "% d'erreur moyenne ")
 
-    print( "-- Lasso : ")
-    print("Mean Squared Error - Lasso:", mse_lasso)
-    print("R2 Score - Lasso:", r2_lasso)
-    print(np.mean((ypreditLasso/ytest)*100) , "% d'erreur moyenne ")
+    # print( "-- Lasso : ")
+    # print("Mean Squared Error - Lasso:", mse_lasso)
+    # print("R2 Score - Lasso:", r2_lasso)
+    # print(np.mean((ypreditLasso/ytest)*100) , "% d'erreur moyenne ")
 
     print( "-- ElasticNet : ")
     print("Mean Squared Error - ElasticNet:", mse_elastic_net)
@@ -58,13 +58,14 @@ def main():
     print(np.mean((ypreditElasticNet/ytest)*100) , "% d'erreur moyenne ")
     #r2
 
-    # plt.figure(figsize=(10, 6))
-    # plt.hist(fullDataSet['Total Deaths'], bins=100, color='skyblue', edgecolor='black')
-    # plt.title('Histogramme des valeurs de Total Deaths')
-    # plt.xlabel('Total Deaths')
-    # plt.ylabel('Fréquence')
-    # plt.grid(True)
-    # plt.show()
+# standart scaler
+    plt.figure(figsize=(10, 6))
+    plt.hist(fullDataSet['Total Deaths'], bins=100, color='skyblue', edgecolor='black')
+    plt.title('Histogramme des valeurs de Total Deaths')
+    plt.xlabel('Total Deaths')
+    plt.ylabel('Fréquence')
+    plt.grid(True)
+    plt.show()
 
 
   
