@@ -2,7 +2,8 @@
 
 <img src="https://cdn.discordapp.com/attachments/1150019887473901569/1201891884935680090/istockphoto-1333043586-612x6121.jpg?ex=65cb780b&is=65b9030b&hm=0d9fa0fd17d7217d976a10fed5cbcd757e27154256ebbe464c9d738cdc1a0f17&" width="1080" height="">
 
-# **Catastrophes Naturelles**
+# **PlotAmbora** 
+### L'outils de prédiction des catastrophes naturelles
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 </div>
 
@@ -12,9 +13,30 @@
 Ce projet a pour but de determiner le nombre de morts/bléssés/personnes touchées des catastrophes naturelles en fonction des différentes informations que nous fournit notre Dataset.
 Nous utiliserons Python et Panda pour traiter ce dataset et pour réaliser de l'apprentissage continu.
 
+# Démarrage 🚀
+
+### Prérequis 
+- Avoir Python >= 3.11
+- Avoir les librairies : 
+  - sklearn 
+  - pandas
+  - matplotlib
+  - numpy 
+
+### Lancement 
+
+Afin de lancer le projet il faut se situer à la source du projet et lancer la commande : 
+
+    python3 src/main.py
+
+# Dossier d'étude 📄
+
+Nous avons effectué un dossier d'études afin d'expliquer notre raisonnement au cours de ce projet et les conclusions que l'ont peu apporter.  
+Celui-ci est disponible ici : <a href="https://www.kaggle.com/datasets/brsdincer/all-natural-disasters-19002021-eosdis?resource=download" target="_blank">Dossier d'étude</a>
+
 <a href="https://www.kaggle.com/datasets/brsdincer/all-natural-disasters-19002021-eosdis?resource=download" target="_blank">Lien du Dataset ici</a>
 
-# Développeurs
+# Développeurs 🧑‍💻
 
 - Corentin RICHARD : corentin.richard@etu.uca.fr
 - Dorian HODIN : dorian.hodin@etu.uca.fr
@@ -29,7 +51,7 @@ Nous utiliserons Python et Panda pour traiter ce dataset et pour réaliser de l'
 </div>
 
 ---
-# Colonnes utilisées : 
+# Colonnes utilisées 📝 : 
 
 * ### Pour ce projet nous allons utiliser les colonnes suivantes de notre dataset : 
   * **Colonne *Year* :** Cette colonne répertorie l'année où la catastrophe est arrivée
