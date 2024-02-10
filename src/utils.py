@@ -16,14 +16,15 @@ def importCleanDataSet():
     ds = pd.read_csv(DATASET_LOCATION,skipinitialspace=True,usecols=[0,4,5,6,8,10,11,12,28,29,30,31,32,33,34,35,37]) # [0,4,5,6,8,10,11,12,28,29,30,31,32,33,34,35,37]
 
     
-    ds = ds[ds['Total Deaths'] <= ds['Total Deaths'].quantile(0.75)]
-    
+    ds['Total Deaths'].fillna(0, inplace=True)
+    ds = ds[ds['Total Deaths'] <= ds['Total Deaths'].quantile(0.80)]
+    print(ds['Total Deaths'])
     #ds.drop(['ISO', 'Region'], axis=1, inplace=True)  
     #ds.drop(['Disaster Type','Disaster Subgroup'], axis=1, inplace=True)  
 
     ds.fillna({'Start Month': 1, 'Start Day': 1,'End Month':1,'End Day':1,'No Injured':0,'No Affected':0,'Total Affected':0}, inplace=True)    
     #ds['Total Deaths'] = ds['Total Deaths'].fillna(ds.groupby(['Disaster Subtype', 'Region'])['Total Deaths'].transform('median'))
-    ds['Total Deaths'] = ds['Total Deaths'].fillna(0)
+    
     # Defining Duration Data
     ds['Start Day'] = ds['Start Day'].astype(int)
     ds['End Day'] = ds['End Day'].astype(int)
@@ -90,12 +91,13 @@ def getInfoDataSet(ds):
     ds.info()
 
 def separateValuesRegression(ds):
-    x = ds.drop(['Total Deaths','Total Affected','No Affected','No Injured'],axis=1)
-    y = ds['Total Deaths'].values
+    dsTmp = ds.copy()
+    y = dsTmp[dsTmp['Total Deaths'] != 0]['Total Deaths'].values
+    x = dsTmp[dsTmp['Total Deaths'] != 0].drop(['Total Deaths','Total Affected','No Affected','No Injured'], axis=1)
     return x,y
 
 def separateValuesClassification(ds):
-    x = ds.drop(['Total Deaths','Total Affected','No Affected','No Injured'],axis=1)
+    x = ds.drop(['Total Deaths','Total Affected','No Affected','No Injured','Lethality'],axis=1)
     y = ds['Lethality'].values
     return x,y
 
