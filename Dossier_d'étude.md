@@ -2,24 +2,24 @@
 
 ### Introduction 
 
-Plotambora est un projet de prédiction du nombre de décès lors des catastrophes naturelles futures. A ces fins nous utilisons techniques de traitement des données, de visualisation et de modélisation prédictive.
+Plotambora est un projet de prédiction du nombre de décès lors des catastrophes naturelles futures. À ces fins, nous utilisons des techniques de traitement des données, de visualisation et de modélisation prédictive.
 
 ### Etapes : 
 
-- Importer et Nettoyer les données des catastrophes passées.
-- Etudier les données afin d'en comprendre les tendances et décider des paramètres importants.
+- Importer et nettoyer les données des catastrophes passées.
+- Étudier les données afin d'en comprendre les tendances et de décider des paramètres importants.
 - Entrainer différents modèles de prédictions 
-- Evaluer les résultats et décider de leur pertinence pour choisir le meilleur. 
+- Évaluer les résultats et décider de leur pertinence pour choisir le meilleur. 
 
 ### Implémentation 
 
-Nous avons choisi d'implémenter de différentes façon nos prévisions, l'une complétant l'autre : 
-- La première est une classification afin déterminer si des morts ont été enregistrées 
-- La seconde est une régression qui déterminera le nombre de morts enregistrés 
+Nous avons choisi d'implémenter de différentes façons nos prévisions, l'une complétant l'autre : 
+- La première est une classification afin de déterminer si des morts ont été enregistrés.
+- La seconde est une régression qui déterminera le nombre de morts enregistrés.
 
 ## 1 - Les données 
 
-Afin d'effectuer ces prévisions nous avons sélectionner certaines données plus pertinentes que les autres, pour ce faire nous avons utiliser des historigrammes et graphiques et avons pu déterminer lesquels étaient pertinents : 
+Afin d'effectuer ces prévisions nous avons sélectionner certaines données plus pertinentes que les autres, pour ce faire nous avons utiliser des histogrammes et graphiques et avons pu déterminer lesquels étaient pertinents : 
 - Les colonnes de Localisation
 - Les colonnes de Date 
 - Les colonnes d'identification des catastrophes 
@@ -27,62 +27,56 @@ Afin d'effectuer ces prévisions nous avons sélectionner certaines données plu
 
 #### # Gestion de la colonne 'Total Deaths' 
 
-'Total Deaths' étant la colonne à prévoir, la gestion de celle-ci a un impact majeur sur la pertinence de notre modèle d'aide à la décision. Nous avons effectué les modifications suivantes pour une plus grande précision 
+'Total Deaths' étant la colonne à prévoir, la gestion de celle-ci a un impact majeur sur la pertinence de notre modèle d'aide à la décision. Nous avons effectué les modifications suivantes pour une plus grande précision.
     
-- **Remplir les valeurs manquantes.** Pour ce faire nous avions plusieurs possibilités, nous avons tester de remplir par la moyenne des valeurs déjà présentes, par la moyenne des valeurs groupés par différentes colonnes, pour finir par choisir la remplissage par zéros : Aucune lignes ne contenaient de zéros, les valeurs non-remplis correspondent donc à 0.
+- **Remplir les valeurs manquantes.** Pour ce faire nous avions plusieurs possibilités, nous avons testé de remplir par la moyenne des valeurs déjà présentes, par la moyenne des valeurs groupés par différentes colonnes, pour finir par choisir la remplissage par zéros : Aucune ligne ne contenait de zéros, les valeurs non-remplis correspondent donc à 0.
 
--  **Exclure les valeurs extrèmes.** Certaines catastrophe ont eu de terribles conséquences et ont donc un rôle négatif sur la précision du modèle. Nous avons dû choisir d'exclure le quantile à 0.8 pour avoir le meilleur rapport entre exclure un minimum de lignes et une meilleure précision.
+-  **Exclure les valeurs extrèmes.** Certaines catastrophe ont eu de terribles conséquences et ont donc un rôle négatif sur la précision du modèle. Nous avons dû choisir d'exclure le quantile à 0.8 pour avoir le meilleur rapport entre exclure un minimum de lignes et avoir une meilleure précision.
 
-La colonne est alors prête à entrainer le jeu de données.
+La colonne est alors prête à entraîner le jeu de données.
 
 
 #### # Gestion de la colonne 'Duration' 
 
-'Duration' était une colonne manquante du DataSet mais pouvant montrer son importance car elle pu augmenter la précision des modèles. Pour la créer nous avons effectuer les actions suivantes : 
+'Duration' était une colonne manquante du DataSet, mais pouvant montrer son importance, car elle a pu augmenter la précision des modèles. Pour la créer nous avons effectuer les actions suivantes : 
 
 - **Création des colonnes Start Date et End Date** à partir de Year,Start Month,Start Day,End Year,End Month, et End Day.
 
-- **Remplissage des valeurs manquantes** par des valeurs par défaut qui définiront une duration égale à 1. 1 car les dates manquantes représentent généralement une catastrophe qui n'as duré qu'un instant. 
+- **Remplissage des valeurs manquantes** par des valeurs par défaut qui définiront une duration égale à 1. 1 car les dates manquantes représentent généralement une catastrophe qui n'a duré qu'un instant. 
 
 - **Calcul de Duration à partir de Start Date et End Date** pour obtenir une durée en jours.
 
 
-#### # Gestion de la colonne 'Lethality'
+## Gestion de la colonne 'Lethality'
 
-Afin d'effectuer la classification pour déterminer si des morts ont été en enregistrés, il nous a fallu rajouter cette colonne représentant cette donnée. 
+Afin d'effectuer la classification pour déterminer si des morts ont été enregistrées, il nous a fallu ajouter cette colonne représentant cette donnée.
 
 - **Une valeur booléenne déterminée** à partir de Total Deaths : si > 0 => True else => False
-
 - **Convertir cette valeur booléenne en Int** pour le modèle d'apprentissage.
 
+## Gestion des autres colonnes
 
-#### # Gestion des autres colonnes 
-
-Les autres colonnes représentant des valeurs en chaine de caractères ont été mappé avec des valeurs en integer afin que le modèle les comprennent.
-
+Les autres colonnes représentant des valeurs en chaîne de caractères ont été mappées avec des valeurs en entier afin que le modèle les comprenne.
 Enfin, les valeurs inutiles ont été rejetées du DataSet.
 
-## 2 - Classification 
+## 2 - Classification
 
-La première valeur à déterminer est celle qui désigne si il y a eu de la mortalité. Dans le cas contraire, l'appel au second modèle sera donc évité.
+La première valeur à déterminer est celle qui désigne s'il y a eu des victimes dans les catastrophes. Dans le cas contraire, l'appel au second modèle sera donc évité.
+Pour ce faire, nous avons choisi en premier 2 modèles d'apprentissage :
+- **SVC (Support Vector Classification)** : cherche à trouver un hyperplan qui sépare de manière optimale les différentes classes en maximisant la marge entre les points les plus proches de chaque classe, appelés vecteurs de support.
+- **Régression Logistique** : modélise la probabilité qu'un exemple appartienne à une classe donnée en utilisant une fonction logistique pour estimer les coefficients de chaque variable indépendante.
 
-Pour ce faire nous avons choisi en premier 2 modèles d'apprentissage :
-- **SVC ( Support Vector Classification ) :** cherche à trouver un hyperplan qui sépare de manière optimale les différentes classes en maximisant la marge entre les points les plus proches de chaque classe, appelés vecteurs de support
+Afin de déterminer le modèle à utiliser, nous effectuons les actions suivantes :
+- Paramétrage des modèles
+- Entraînement des modèles
+- Prédiction des valeurs
+- Affichage de la précision
 
-- **Régression Logistique :** modélise la probabilité qu'un exemple appartienne à une classe donnée en utilisant une fonction logistique pour estimer les coefficients de chaque variable indépendante
-
-Afin de déterminer le modèles à utiliser nous effectuons les actions suivantes: 
-- Paramétrage des modèles 
-- Entrainement des modèles 
-- Prédiction des valeurs 
-- Affichage de la précisions 
-
-
-Exemple :  
+Exemple :
 
     ----------- Classification de la Léthalité -----------
-    SVC Accuracy Score :  0.6298701298701299
-    Logistic Regression Accuracy Score :  0.6298701298701299
+    SVC Accuracy Score : 0.6298701298701299
+    Logistic Regression Accuracy Score : 0.6298701298701299
 
 On peut voir que le modèle n'est pas très précis au niveau de la classification.  
 Nous obtenons alors que le modèle SVC est légèrement plus précis que la régression Logistique.
@@ -91,25 +85,23 @@ Nous obtenons alors que le modèle SVC est légèrement plus précis que la rég
 
 ## 3 - Régression 
 
-Après avoir déterminé la présence de victime dans les catastrophes nous pouvons passer à en estimer le nombre par la régression.
+Après avoir déterminé la présence de victimes dans les catastrophes, nous pouvons passer à en estimer le nombre par la régression.
 
-Pour ce faire nous avons choisi en premier 3 modèles d'apprentissage :
+Pour ce faire, nous avons choisi en premier 3 modèles d'apprentissage :
 - **Régression Linéaire** : Cherche à établir une relation linéaire entre une variable dépendante et plusieurs variables indépendantes en ajustant un modèle qui minimise les erreurs de prédiction.
-
 - **Lasso** : Ajoute une pénalité L1 à la fonction de coût de la régression linéaire, ce qui favorise la réduction du nombre de coefficients non nuls dans le modèle, ce qui peut conduire à la sélection de variables.
+- **ElasticNet** : Combine à la fois les pénalités L1 et L2 dans la fonction de coût de la régression linéaire, ce qui permet de bénéficier des avantages de la sélection de caractéristiques du Lasso tout en atténuant certains de ses inconvénients, comme la tendance à sélectionner un seul prédicteur lorsque plusieurs prédicteurs sont hautement corrélés.
 
-- **ElasticNet** : combine à la fois les pénalités L1 et L2 dans la fonction de coût de la régression linéaire, ce qui permet de bénéficier des avantages de la sélection de caractéristiques du Lasso tout en atténuant certains de ses inconvénients, comme la tendance à sélectionner un seul prédicteur lorsque plusieurs prédicteurs sont hautement corrélés.
-
-Encore une fois afin de déterminer le meilleur modèle, nous effectuons les actions suivantes: 
+Encore une fois, afin de déterminer le meilleur modèle, nous effectuons les actions suivantes: 
 - Paramétrage des modèles 
-- Entrainement des modèles 
+- Entraînement des modèles 
 - Prédiction des valeurs 
 - Affichage de la précisions 
 
-
 Exemple :
 
-    ----------- Régréssion des totaux de morts -----------
+
+    ----------- Régression des totaux de morts -----------
     -- Linear Regression : 
     Mean Squared Error - Linear Regression: 164.3541836165224
     R2 Score - Linear Regression: 0.1332531970469013
@@ -120,8 +112,8 @@ Exemple :
     Mean Squared Error - ElasticNet: 166.75633415225224
     R2 Score - ElasticNet: 0.12058509057561206
 
-La Régression a aussi des valeurs qui sont peu précises malgré les actions sur les données.
-On peut voir par un MSE plus petit et un R2 plus proche de 0 que la régression linéaire est la plus efficace.
+La régression a aussi des valeurs qui sont peu précises malgré les actions sur les données.
+On peut voir, par un MSE plus petit et un R2 plus proche de 0, que la régression linéaire est la plus efficace.
 
 ### Le modèle Régression Linéaire sera alors choisi pour la Régression.
 
