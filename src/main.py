@@ -107,9 +107,11 @@ def main():
 
         # Predict using SVC
         yPreditSVC = modelSVC.predict(Xtest)
+        yPreditLogistic= modelSVC.predict(Xtest)
 
         # Calculate accuracy score for SVC
         print('SVC Accuracy Score : ',accuracy_score(yPreditSVC,ytest))
+        print('Logistic Regression Accuracy Score : ',accuracy_score(yPreditLogistic,ytest))
 
   
 # Entry point of the script

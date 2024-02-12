@@ -32,7 +32,7 @@ Afin de lancer le projet il faut se situer à la source du projet et lancer la c
 # Dossier d'étude 📄
 
 Nous avons effectué un dossier d'études afin d'expliquer notre raisonnement au cours de ce projet et les conclusions que l'ont peu apporter.  
-Celui-ci est disponible ici : <a href="https://www.kaggle.com/datasets/brsdincer/all-natural-disasters-19002021-eosdis?resource=download" target="_blank">Dossier d'étude</a>
+Celui-ci est disponible ici : <a href="./Dossier_d&apos;étude.md" target="_blank">Dossier d'étude</a>
 
 <a href="https://www.kaggle.com/datasets/brsdincer/all-natural-disasters-19002021-eosdis?resource=download" target="_blank">Lien du Dataset ici</a>
 
