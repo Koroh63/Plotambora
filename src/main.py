@@ -98,8 +98,9 @@ def main():
         Xtrain,Xtest,ytrain,ytest = initTraining(X,Y)
 
         # Initialize classification models
-        modelSVC = SVC()
-        modelLogisticRegression = LogisticRegression(max_iter=10000)
+        modelSVC = SVC(C=5.0, kernel='rbf', gamma='scale')
+        modelLogisticRegression = LogisticRegression(C=5.0, solver='lbfgs', max_iter=10000)
+
         
         # Fit classification models
         modelSVC.fit(Xtrain,ytrain)
@@ -107,7 +108,7 @@ def main():
 
         # Predict using SVC
         yPreditSVC = modelSVC.predict(Xtest)
-        yPreditLogistic= modelSVC.predict(Xtest)
+        yPreditLogistic= modelLogisticRegression.predict(Xtest)
 
         # Calculate accuracy score for SVC
         print('SVC Accuracy Score : ',accuracy_score(yPreditSVC,ytest))
