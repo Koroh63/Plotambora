@@ -47,7 +47,7 @@ La colonne est alors prête à entraîner le jeu de données.
 - **Calcul de Duration à partir de Start Date et End Date** pour obtenir une durée en jours.
 
 
-## Gestion de la colonne 'Lethality'
+#### Gestion de la colonne 'Lethality'
 
 Afin d'effectuer la classification pour déterminer si des morts ont été enregistrées, il nous a fallu ajouter cette colonne représentant cette donnée.
 
